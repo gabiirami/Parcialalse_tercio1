@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+struct Point {
+    double x;
+    double y;
+};
+
+int contarPuntosEnCuadrante(Point puntos[], int n, int cuadrante) {
+    int contador = 0;
+
+    for (int i = 0; i < n; i++) {
+
+        // Ignorar puntos sobre los ejes
+        if (puntos[i].x == 0 || puntos[i].y == 0) {
+            continue;
+        }
+
+        if (cuadrante == 1) {
+            if (puntos[i].x > 0 && puntos[i].y > 0)
+                contador++;
+        }
+        else if (cuadrante == 2) {
+            if (puntos[i].x < 0 && puntos[i].y > 0)
+                contador++;
+        }
+        else if (cuadrante == 3) {
+            if (puntos[i].x < 0 && puntos[i].y < 0)
+                contador++;
+        }
+        else if (cuadrante == 4) {
+            if (puntos[i].x > 0 && puntos[i].y < 0)
+                contador++;
+        }
+    }
+
+    return contador;
+}
+
+int main() {
+
+    int n;
+    cout << "Ingrese la cantidad de puntos: ";
+    cin >> n;
+
+    Point puntos[n];
+
+    for (int i = 0; i < n; i++) {
+        cout << "Punto " << i + 1 << endl;
+        cout << "x: ";
+        cin >> puntos[i].x;
+        cout << "y: ";
+        cin >> puntos[i].y;
+    }
+
+    int cuadrante;
+    cout << "Ingrese el cuadrante (1-4): ";
+    cin >> cuadrante;
+
+    int resultado = contarPuntosEnCuadrante(puntos, n, cuadrante);
+
+    cout << "Cantidad de puntos en el cuadrante "
+         << cuadrante << ": "
+         << resultado << endl;
+
+    return 0;
+}
